@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Find Your Pets</title>
+    <link rel="stylesheet" href="/vendors/bootstrap.min.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+
+    <script type="text/javascript" src="./vendors/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="/vendors/angular.min.js"></script>
+    <script type="text/javascript" src="/scripts/angular.js"></script>
+    <script type="text/javascript" src="/scripts/client-app.js"></script>
+    <!-- <script type="text/javascript" src="/scripts/factories/factories.js"></script> -->
+</head>
+
+<body ng-controller="petController">
+    <h1>Pet Finder</h1>
+
+    <!-- SHOW THAT MAIN ASS NAV BAR DUUUUDE -->
+    <select ng-model="selected_id" ng-options="animal.id as animal.name for animal in options" ng-change="selected_animal=(options|filter:{id:selected_id})[0].name">
+    </select>
+    <button type="submit" ng-click="randomPet(selected_animal)">Search!</button>
+    <button type="submit" ng-hide="isfavorited" ng-click="addFavorite()">Add Favorite</button>
+    <button type="submit" ng-click="findFavorites()">My Favorites:{{favorites}}</button>
+    <select ng-model="selected_type" ng-change="findFavorites(selected_type)">
+        <option>All</option>
+        <option ng-repeat="animal in animalTypes|unique:'name'" value="{{animal.name}}">{{animal.name}}s ({{favoriteCount[animal.name]}})</option>
+    </select>
+    <!-- {{selectedOutput}} -->
+
+
+
+    <!-- SHOW THEM STUPID ASS RANDOM PET DOOD -->
+    <div id="petInfo" ng-hide="showRandom">
+        <h1>{{pet.name.$t}}</h1>
+        <h4>{{pet.age.$t}}:{{pet.breeds.breed.$t}}</h4>
+        <img ng-src="{{pet.media.photos.photo[2].$t}}" width="400" height="400" />
+        <p id="petDescription">{{pet.description.$t}}</p>
+    </div>
+
+
+    <!-- SHOW ALL THEM FAVORITES YO -->
+    <div id="currentFavorites" ng-hide="showFavorite">
+        <div class="favorite" ng-repeat="favorite in currentFavorites">
+            <h4 class="animalName">{{favorite.pet_name}}<span class="petAge">{{favorite.pet_age}}</span></h4>
+            <h6 class="animalType">{{favorite.pet_type}}</h6>
+            <img ng-src="{{favorite.pet_img}}" width="200" height="200" />
+        </div>
+    </div>
+
+
+
+    <!-- <main ng-view></main> -->
+</body>
+
+</html>

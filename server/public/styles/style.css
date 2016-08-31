@@ -1,0 +1,10 @@
+.favorite{
+  float: left;
+  display: inline-block;
+  height: 250px;
+  width: 250px;
+}
+
+#petDescription{
+  width:400px;
+}

@@ -1,0 +1,10 @@
+CREATE TABLE petData (
+    id SERIAL PRIMARY KEY,
+    pet_name character varying(120),
+    pet_age character varying(120),
+    pet_description character varying(600),
+    pet_type character varying(120),
+    pet_id character varying(120),
+    pet_img character varying(120),
+    pet_animal character varying(120)
+);
